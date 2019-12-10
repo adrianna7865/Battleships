@@ -13,7 +13,7 @@ ship_y=randint(0,10)
 print(ship_x)
 print(ship_y)
 board = []
-board[ship_x][ship_y] = "+"
+#board[ship_x][ship_y] = "+"
 
 
 def random_player(players):
@@ -100,7 +100,7 @@ def player_turns(total_turns):
         return player_1
     else:
         return player_2
-player_turns()
+
 #Gameplay
 print_board(board)
 grid = create_grid(Rows,Columns)
@@ -108,3 +108,8 @@ display_grid(Rows, Columns)
 guess_x()
 guess_y()
 hitship()
+player_turns()
+
+
+
+
