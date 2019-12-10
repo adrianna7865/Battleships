@@ -12,7 +12,6 @@ ship_x=randint(0,10)
 ship_y=randint(0,10)
 print(ship_x)
 print(ship_y)
-board[ship_x][ship_y] = "+"
 board = []
 
 def random_player(players):
@@ -30,9 +29,7 @@ def print_board(board):
         while (Rows > 10) or (Columns > 10) or (Rows <= 0) or (Columns <= 0):
             Rows = int(9)
             Columns = int(9)
-print()
-
-print_board(board)
+    print()
 
 def create_grid(Rows, Columns): #Creates the 2D Data Grid
     grid = []
@@ -43,19 +40,11 @@ def create_grid(Rows, Columns): #Creates the 2D Data Grid
         grid.append(row)
     return grid
 
-grid = create_grid(Rows,Columns)
-print()
-
-
 def display_grid(Rows, Columns): #Prints the labels for the grid
     column_names = 'abcdefghijklmnopqrstuvwxyz'[:Columns]
     print('  | ' + ' | '.join(column_names.upper()) + ' |')
     for number, row in enumerate(grid):
         print(number + 1, '| ' + ' | '.join(row) + ' |')
-
-
-display_grid(Rows, Columns)
-print_board(board)
 
 def guess_x():#gracz wybiera pole na planszy przeciwnika 
     guess_x = 999   #ta liczba jest po to zeby na starcie wchodzic do while'a *magic string*, mozna tez to zrobic rozmiar planszy +1
@@ -67,8 +56,6 @@ def guess_x():#gracz wybiera pole na planszy przeciwnika
         if guess_x not in range(0,11):
             print ("number outside of range")
 
-guess_x()
-
 def guess_y():
     guess_y = 999
     while guess_y not in range(0,11):
@@ -79,7 +66,6 @@ def guess_y():
         if guess_y not in range(0,11):
             print ("number outside of range")
 
-guess_y()
 
 def hitship():
     while ship_x == guess_x and ship_y == guess_y:
@@ -92,17 +78,14 @@ def hitship():
     except:
         pass
     
-hitship()
+
 #elif guess_x != ship_x and guess_y != ship_y:
 # print('Pudlo! Nie masz wiecej ruchow') 
 
-
-
-def update_gridHit(grid, GuessRow, GuessColumn):
-    grid[GuessRow-1][GuessColumn-1] = 'O'
-
-def update_gridMiss(grid, GuessRow, GuessColumn):
-    grid[GuessRow-1][GuessColumn-1] = 'X'
-
-print("Teraz ruch gracza drugiego!")
-
+#Gameplay
+print_board(board)
+grid = create_grid(Rows,Columns)
+display_grid(Rows, Columns)
+guess_x()
+guess_y()
+hitship()
