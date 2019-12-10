@@ -5,15 +5,16 @@ print("Let the Battleships game begin!")
 player_1 = input("What's your name? ")
 player_2 = input("What's your name? ")
 players = [player_1, player_2]
-turn_pl = 0
+total_turns= 0
 Rows = 9
 Columns = 9
 ship_x=randint(0,10)
 ship_y=randint(0,10)
 print(ship_x)
 print(ship_y)
-board[ship_x][ship_y] = "+"
 board = []
+board[ship_x][ship_y] = "+"
+
 
 def random_player(players):
     return choice(players)
@@ -106,3 +107,10 @@ def update_gridMiss(grid, GuessRow, GuessColumn):
 
 print("Teraz ruch gracza drugiego!")
 
+def player_turns(total_turns):
+    if total_turns %2 == 0:
+        total_turns +=1
+        return player_1
+    else:
+        return player_2
+player_turns()
