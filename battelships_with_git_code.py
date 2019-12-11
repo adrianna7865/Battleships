@@ -5,14 +5,16 @@ print("Let the Battleships game begin!")
 player_1 = input("What's your name? ")
 player_2 = input("What's your name? ")
 players = [player_1, player_2]
-total_turns= 0
+total_turns= 10
 Rows = 9
 Columns = 9
-ship_x=randint(0,10)
-ship_y=randint(0,10)
+ship_x=randint(0,9)
+ship_y=randint(0,9)
 print(ship_x)
 print(ship_y)
 board = []
+guess_y = 0
+guess_x = 0
 #board[ship_x][ship_y] = "+"
 
 
@@ -49,36 +51,33 @@ def display_grid(Rows, Columns): #Prints the labels for the grid
         print(number + 1, '| ' + ' | '.join(row) + ' |')
 
 def guess_x():#gracz wybiera pole na planszy przeciwnika 
+    global guess_x
     guess_x = 999   #ta liczba jest po to zeby na starcie wchodzic do while'a *magic string*, mozna tez to zrobic rozmiar planszy +1
-    while guess_x not in range(0,11):
+    while guess_x not in range(0,10):
         try:  #try and except wylapuje bledy jakby ktos np wpisal litery zamiast liczb
-            guess_x = int(input("enter position x (row): "))
+            guess_x = (int(input("enter position x (row): "))-1)
         except: 
             pass #dodac typerror dla usera
-        if guess_x not in range(0,11):
+        if guess_x not in range(0,10):
             print ("number outside of range")
 
 def guess_y():
+    global guess_y
     guess_y = 999
-    while guess_y not in range(0,11):
+    while guess_y not in range(0,10):
         try:
-            guess_y = int(input("enter position y (column): "))
+            guess_y = (int(input("enter position y (column): "))-1)
         except: 
             pass
-        if guess_y not in range(0,11):
+        if guess_y not in range(0,10):
             print ("number outside of range")
 
 
-def hitship():
+def hitship(ship_x,ship_y,guess_x,guess_y):
     while ship_x == guess_x and ship_y == guess_y:
         print ("Trafiony, masz jeszcze jeden ruch")
         board[ship_x][ship_y] = "X"
         print_board(board)
-    try:
-        guess_y = int(input("enter position x (row): "))
-        guess_x = int(input("enter position y (column): "))
-    except:
-        pass
     
 
 #elif guess_x != ship_x and guess_y != ship_y:
@@ -93,13 +92,12 @@ def update_gridMiss(grid, GuessRow, GuessColumn):
     grid[GuessRow-1][GuessColumn-1] = 'X'
 
 print("Teraz ruch gracza drugiego!")
-
 def player_turns(total_turns):
-    if total_turns %2 == 0:
-        total_turns +=1
+    if float(total_turns) %2 == 0:
         return player_1
     else:
         return player_2
+    total_turns +=1
 
 #Gameplay
 print_board(board)
@@ -107,8 +105,8 @@ grid = create_grid(Rows,Columns)
 display_grid(Rows, Columns)
 guess_x()
 guess_y()
-hitship()
-player_turns()
+hitship(ship_x,ship_y,guess_x,guess_y)
+player_turns(total_turns)
 
 
 
