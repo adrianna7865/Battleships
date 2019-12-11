@@ -46,7 +46,7 @@ def display_grid(Rows, Columns): #Prints the labels for the grid
     column_names = 'abcdefghijklmnopqrstuvwxyz'[:Columns]
     print('  | ' + ' | '.join(column_names.upper()) + ' |')
     for number, row in enumerate(grid):
-        print(number + 1, '| ' + ' | '.join(row) + ' |')
+        print(number + 1, '| ' + ' | '.join(row) + ' |' )
 
 def guess_x():#gracz wybiera pole na planszy przeciwnika 
     guess_x = 999   #ta liczba jest po to zeby na starcie wchodzic do while'a *magic string*, mozna tez to zrobic rozmiar planszy +1
@@ -84,13 +84,11 @@ def hitship():
 #elif guess_x != ship_x and guess_y != ship_y:
 # print('Pudlo! Nie masz wiecej ruchow') 
 
+def update_gridHit(grid, guess_x, guess_y):
+    grid[guess_x-1][guess_y-1] = 'O'
 
-
-def update_gridHit(grid, GuessRow, GuessColumn):
-    grid[GuessRow-1][GuessColumn-1] = 'O'
-
-def update_gridMiss(grid, GuessRow, GuessColumn):
-    grid[GuessRow-1][GuessColumn-1] = 'X'
+def update_gridMiss(grid, guess_x, guess_y):
+    grid[guess_x-1][guess_y-1] = 'X'
 
 print("Teraz ruch gracza drugiego!")
 
@@ -109,7 +107,4 @@ guess_x()
 guess_y()
 hitship()
 player_turns()
-
-
-
 
