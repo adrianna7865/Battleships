@@ -1,5 +1,5 @@
 from random import randint,choice
-import random #mo<na go pominac bo nie byl uzyty
+import random #mozna go pominac bo nie byl uzyty A JEDNAK
 import time
 print("Let the Battleships game begin!")
 player_1 = input("What's your name? ")
@@ -10,27 +10,25 @@ Rows = 9
 Columns = 9
 ship_x=randint(0,9)
 ship_y=randint(0,9)
+<<<<<<< HEAD
 board = []
 guess_y = 0
 guess_x = 0
 #board[ship_x][ship_y] = "+"
+=======
+player_1_grid=[]
+player_2_grid=[]
+player_1_shots=[]
+player_2_shots=[]
+>>>>>>> c9193dcc20c732c370566cc915f2f32ab9030382
 
 def random_player(players):
     return choice(players)
-
 if random_player(players) == player_1:
         print(player_1, " starts the game")
 else:
         print(player_2, " starts the game")
 time.sleep(4)
-
-def print_board(board):
-    for row in board:
-        print(" ".join(row))
-        while (Rows > 10) or (Columns > 10) or (Rows <= 0) or (Columns <= 0):
-            Rows = int(9)
-            Columns = int(9)
-    print()
 
 def create_grid(Rows, Columns): #Creates the 2D Data Grid
     grid = []
@@ -41,19 +39,19 @@ def create_grid(Rows, Columns): #Creates the 2D Data Grid
         grid.append(row)
     return grid
 
-def display_grid(Rows, Columns): #Prints the labels for the grid
+def display_grid(Rows, Columns, grid): #Prints the labels for the grid
     column_names = 'abcdefghijklmnopqrstuvwxyz'[:Columns]
     print('  | ' + ' | '.join(column_names.upper()) + ' |')
     for number, row in enumerate(grid):
         print(number + 1, '| ' + ' | '.join(row) + ' |' )
 
-def guess_x():#gracz wybiera pole na planszy przeciwnika 
+def guess_x():#gracz wybiera pole na planszy przeciwnika
     global guess_x
     guess_x = 999   #ta liczba jest po to zeby na starcie wchodzic do while'a *magic string*, mozna tez to zrobic rozmiar planszy +1
     while guess_x not in range(0,9):
         try:  #try and except wylapuje bledy jakby ktos np wpisal litery zamiast liczb
             guess_x = (int(input("enter position x (row): "))-1)
-        except: 
+        except:
             pass #dodac typerror dla usera
         if guess_x not in range(0,9):
             print ("number outside of range")
@@ -64,11 +62,12 @@ def guess_y():
     while guess_y not in range(0,9):
         try:
             guess_y = (int(input("enter position y (column): "))-1)
-        except: 
+        except:
             pass
         if guess_y not in range(0,9):
             print ("number outside of range")
 
+<<<<<<< HEAD
 
 def hitship(ship_x,ship_y,guess_x,guess_y):
     while ship_x == guess_x and ship_y == guess_y:
@@ -89,18 +88,61 @@ def update_gridMiss(grid, guess_x, guess_y):
 
 
 def player_turns(total_turns):
+=======
+def place_ships(empty_grid):
+    counter = 0 #musimy wiedziec ile statkow juz jest rozmieszczonych
+    while counter < 4 :
+        x=random.randrange(9)
+        y=random.randrange(9)
+        if empty_grid[x][y] == " ": #sprawdza czy nie jest puste pole, jak nie jest puste to znaczy ze jest zajete
+            counter+=1
+            empty_grid[x][y]='+'
+    return empty_grid
+    #it's taken
+    #placing
+
+def player_turns(total_turns): #Przepisać!
+    #todo Checks which player shoots, check those shots on enemies grid
+>>>>>>> c9193dcc20c732c370566cc915f2f32ab9030382
     if float(total_turns) %2 == 0:
         return player_1
     else:
         return player_2
         print("Teraz ruch gracza drugiego!")
     total_turns +=1
+    print("Teraz ruch gracza drugiego!")
+
+def shot(x,y,shot_grid,enemy_grid):
+    if enemy_grid[x][y] != " ":
+        print("HIT!")
+        shot_grid[x][y] = "#"
+        enemy_grid[x][y] = "#"
+    else:
+        print("MISS")
+        shot_grid[x][y] ="X"
+        
+        #todo check if all ships are sunken!
+
 
 #Gameplay
-print_board(board)
-grid = create_grid(Rows,Columns)
-display_grid(Rows, Columns)
+
+player_1_grid  = create_grid(9,9)
+player_2_grid = create_grid(9,9) #dwie plansze w pamieci
+player_1_shots = create_grid(9,9)
+player_2_shots = create_grid(9,9)
+player_1_grid=place_ships(player_1_grid)
+player_2_grid=place_ships(player_2_grid)
+#print_board(player_1_grid)
+
+#grid = create_grid(Rows,Columns)
+display_grid(Rows, Columns, player_1_shots)
 guess_x()
 guess_y()
-hitship(ship_x,ship_y,guess_x,guess_y)
+shot(guess_x,guess_y,player_1_shots,player_2_grid)
+#hitship(ship_x,ship_y,guess_x,guess_y)
 player_turns(total_turns)
+<<<<<<< HEAD
+=======
+
+#trzeba podliczyc zestrzelone statki i to ktorego gracza zeby robic game over
+>>>>>>> c9193dcc20c732c370566cc915f2f32ab9030382
