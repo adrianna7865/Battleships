@@ -14,6 +14,7 @@ player_1_grid=[]
 player_2_grid=[]
 player_1_shots=[]
 player_2_shots=[]
+current_player = [player_1, player_2]#input od gracza nr 1 albo gracza nr 2
 
 def random_player(players):
     return choice(players)
@@ -74,7 +75,9 @@ def place_ships(empty_grid):
 
 def player_turns(total_turns): #Przepisać!
     #todo Checks which player shoots, check those shots on enemies grid
-    if float(total_turns) %2 == 0:
+    if 
+    
+    float(total_turns) %2 == 0:
         return player_1
     else:
         return player_2
@@ -101,14 +104,13 @@ player_1_shots = create_grid(9,9)
 player_2_shots = create_grid(9,9)
 player_1_grid=place_ships(player_1_grid)
 player_2_grid=place_ships(player_2_grid)
-#print_board(player_1_grid)
 
-#grid = create_grid(Rows,Columns)
+playerOneTurn = True
+#playerOneTurn = not playerOneTurn
 display_grid(Rows, Columns, player_1_shots)
 guess_x()
 guess_y()
 shot(guess_x,guess_y,player_1_shots,player_2_grid)
-#hitship(ship_x,ship_y,guess_x,guess_y)
 player_turns(total_turns)
 
-#trzeba podliczyc zestrzelone statki i to ktorego gracza zeby robic game over
+#trzeba podliczyc zestrzelone statki (i ktorego gracza) zeby robic game over
