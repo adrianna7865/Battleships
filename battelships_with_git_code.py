@@ -10,6 +10,12 @@ Rows = 9
 Columns = 9
 ship_x=randint(0,9)
 ship_y=randint(0,9)
+<<<<<<< HEAD
+board = []
+guess_y = 0
+guess_x = 0
+#board[ship_x][ship_y] = "+"
+=======
 player_1_grid=[]
 player_2_grid=[]
 player_1_shots=[]
@@ -61,6 +67,28 @@ def guess_y():
         if guess_y not in range(0,9):
             print ("number outside of range")
 
+<<<<<<< HEAD
+
+def hitship(ship_x,ship_y,guess_x,guess_y):
+    while ship_x == guess_x and ship_y == guess_y:
+        print ("Trafiony, masz jeszcze jeden ruch")
+        board[ship_x][ship_y] = "X"
+        total_turns +=1
+        print_board(board)
+    
+
+#elif guess_x != ship_x and guess_y != ship_y:
+# print('Pudlo! Nie masz wiecej ruchow') 
+
+def update_gridHit(grid, guess_x, guess_y):
+    grid[guess_x-1][guess_y-1] = 'O'
+
+def update_gridMiss(grid, guess_x, guess_y):
+    grid[guess_x-1][guess_y-1] = 'X'
+
+
+def player_turns(total_turns):
+=======
 def place_ships(empty_grid):
     counter = 0 #musimy wiedziec ile statkow juz jest rozmieszczonych
     while counter < 4 :
@@ -81,6 +109,7 @@ def player_turns(total_turns): #Przepisać!
         return player_1
     else:
         return player_2
+        print("Teraz ruch gracza drugiego!")
     total_turns +=1
     print("Teraz ruch gracza drugiego!")
 
@@ -112,5 +141,8 @@ guess_x()
 guess_y()
 shot(guess_x,guess_y,player_1_shots,player_2_grid)
 player_turns(total_turns)
+<<<<<<< HEAD
+=======
 
 #trzeba podliczyc zestrzelone statki (i ktorego gracza) zeby robic game over
+>>>>>>> c9193dcc20c732c370566cc915f2f32ab9030382
