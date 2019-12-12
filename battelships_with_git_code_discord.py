@@ -2,25 +2,25 @@ from random import randint,choice
 import random #mozna go pominac bo nie byl uzyty A JEDNAK
 import time
 print("Let the Battleships game begin!")
-player_1 = input("What's your name? ")
-player_2 = input("What's your name? ")
-players = [player_1, player_2]
+player_one = input("What's your name? ")
+player_two = input("What's your name? ")
+players = [player_one, player_two]
 total_turns= 10
 Rows = 9
 Columns = 9
 ship_x=randint(0,9)
 ship_y=randint(0,9)
-player_1_grid=[]
-player_2_grid=[]
-player_1_shots=[]
-player_2_shots=[]
+player_one_grid=[]
+player_two_grid=[]
+player_one_shots=[]
+player_two_shots=[]
 
 def random_player(players):
     return choice(players)
-if random_player(players) == player_1:
-        print(player_1, " starts the game")
+if random_player(players) == player_one:
+        print(player_one, " starts the game")
 else:
-        print(player_2, " starts the game")
+        print(player_two, " starts the game")
 time.sleep(4)
 
 def create_grid(Rows, Columns): #Creates the 2D Data Grid
@@ -75,9 +75,9 @@ def place_ships(empty_grid):
 def player_turns(total_turns): #Przepisać!
     #todo Checks which player shoots, check those shots on enemies grid
     if float(total_turns) %2 == 0:
-        return player_1
+        return player_one
     else:
-        return player_2
+        return player_two
     total_turns +=1
     print("Teraz ruch gracza drugiego!")
 
@@ -95,22 +95,22 @@ def shot(x,y,shot_grid,enemy_grid):
 
 #Gameplay
 
-player_1_grid  = create_grid(9,9)
-player_2_grid = create_grid(9,9) #dwie plansze w pamieci
-player_1_shots = create_grid(9,9)
-player_2_shots = create_grid(9,9)
-player_1_grid=place_ships(player_1_grid)
-player_2_grid=place_ships(player_2_grid)
+player_one_grid  = create_grid(9,9)
+player_two_grid = create_grid(9,9) #dwie plansze w pamieci
+player_one_shots = create_grid(9,9)
+player_two_shots = create_grid(9,9)
+player_one_grid=place_ships(player_one_grid)
+player_two_grid=place_ships(player_two_grid)
 #print_board(player_1_grid)
 
-playerOneTurn = True
-#playerOneTurn = not playerOneTurn
+player_one_Turn = True
+player_one_Turn = not player_one_Turn
 
 #grid = create_grid(Rows,Columns)
-display_grid(Rows, Columns, player_1_shots)
+display_grid(Rows, Columns, player_one_shots)
 guess_x()
 guess_y()
-shot(guess_x,guess_y,player_1_shots,player_2_grid)
+shot(guess_x,guess_y,player_one_shots,player_two_grid)
 #hitship(ship_x,ship_y,guess_x,guess_y)
 player_turns(total_turns)
 
