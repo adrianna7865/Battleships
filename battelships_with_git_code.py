@@ -10,13 +10,10 @@ Rows = 9
 Columns = 9
 ship_x=randint(0,9)
 ship_y=randint(0,9)
-print(ship_x)
-print(ship_y)
 board = []
 guess_y = 0
 guess_x = 0
 #board[ship_x][ship_y] = "+"
-
 
 def random_player(players):
     return choice(players)
@@ -53,23 +50,23 @@ def display_grid(Rows, Columns): #Prints the labels for the grid
 def guess_x():#gracz wybiera pole na planszy przeciwnika 
     global guess_x
     guess_x = 999   #ta liczba jest po to zeby na starcie wchodzic do while'a *magic string*, mozna tez to zrobic rozmiar planszy +1
-    while guess_x not in range(0,10):
+    while guess_x not in range(0,9):
         try:  #try and except wylapuje bledy jakby ktos np wpisal litery zamiast liczb
             guess_x = (int(input("enter position x (row): "))-1)
         except: 
             pass #dodac typerror dla usera
-        if guess_x not in range(0,10):
+        if guess_x not in range(0,9):
             print ("number outside of range")
 
 def guess_y():
     global guess_y
     guess_y = 999
-    while guess_y not in range(0,10):
+    while guess_y not in range(0,9):
         try:
             guess_y = (int(input("enter position y (column): "))-1)
         except: 
             pass
-        if guess_y not in range(0,10):
+        if guess_y not in range(0,9):
             print ("number outside of range")
 
 
@@ -77,6 +74,7 @@ def hitship(ship_x,ship_y,guess_x,guess_y):
     while ship_x == guess_x and ship_y == guess_y:
         print ("Trafiony, masz jeszcze jeden ruch")
         board[ship_x][ship_y] = "X"
+        total_turns +=1
         print_board(board)
     
 
@@ -89,12 +87,13 @@ def update_gridHit(grid, guess_x, guess_y):
 def update_gridMiss(grid, guess_x, guess_y):
     grid[guess_x-1][guess_y-1] = 'X'
 
-print("Teraz ruch gracza drugiego!")
+
 def player_turns(total_turns):
     if float(total_turns) %2 == 0:
         return player_1
     else:
         return player_2
+        print("Teraz ruch gracza drugiego!")
     total_turns +=1
 
 #Gameplay
@@ -105,4 +104,3 @@ guess_x()
 guess_y()
 hitship(ship_x,ship_y,guess_x,guess_y)
 player_turns(total_turns)
-
